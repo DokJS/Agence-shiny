@@ -7,7 +7,6 @@ import Header from './components/Header/Index';
 import Error from './components/Error/Index';
 import Results from './pages/Results/Index';
 import Freelances from './pages/Freelances/Index';
-import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
