@@ -1,6 +1,14 @@
 import React from 'react'
 import Card from '../../components/Card/Index';
 import DefaultPicture from '../../assets/profile.png';
+import styled from 'styled-components';
+
+const CardContainer = styled.div`
+display: grid;
+gap: 24px;
+grid-template-rows: repeat(2,350px);
+grid-template-columns: repeat(2,1fr);
+`
 
 const Freelances = () => {
   const freelanceProfiles = [
@@ -27,7 +35,9 @@ const Freelances = () => {
   return (
     <div>
       <div>Freelances</div>
+      <CardContainer>
       {freelancersList}
+      </CardContainer>
     </div>
   )
 }
