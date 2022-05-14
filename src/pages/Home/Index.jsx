@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useLayoutEffect} from 'react';
 import Logo from '../../assets/grosLogo.svg';
 import styled from 'styled-components';
 import colors from '../../Utils/Style/colors';
@@ -50,6 +50,10 @@ border:none;
 `
 
 const Home = () => {
+
+  useLayoutEffect(()=> {
+    document.title= 'Agence Shiny'
+  })
 
   return (
     <StyledMain>
