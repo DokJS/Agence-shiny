@@ -34,19 +34,18 @@ const Survey = () => {
   const questionNumberInt = parseInt(questionNumber)
 
   // Used to contain question retrieved from the API
-  const [surveyData, setSurveyData] = useState({})
+  const [questions,setQuestions] = useState({})
   // Used to detect data's disponibility
   const [isDataLoading, setIsDataLoading] = useState(true)
-  // used to detect when display buttons
-  const [display, setDisplay] = useState(false)
   // used for store error
   const [error, setError] = useState(null)
 
   useEffect(() => {
     fetch('http://www.localhost:8000/survey')
       .then((backResponse) => {
-        return backResponse.json().then((jsonResponse) => {
-          setSurveyData(jsonResponse.surveyData)
+        return backResponse.json()
+        .then((jsonResponse) => {
+          setQuestions(jsonResponse.surveyData)
         })
       })
       .catch((error) => {
@@ -54,26 +53,29 @@ const Survey = () => {
       })
   }, [])
 
-  useEffect(() => {
-    if (surveyData !== {} && error == null) {
-      setIsDataLoading(false)
+  useEffect(()=> {
+    if(questions !== {} && error === null){
+      setIsDataLoading(false);
     }
-  }, [surveyData, error])
+  },[questions,error])
+
+
 
   const prevButton = questionNumberInt > 1 && (
     <StyledLink to={`survey/${questionNumberInt - 1}`}>Précedent</StyledLink>
   )
+
   const nextButton =
     questionNumberInt < 10 ? (
-      <StyledLink to={`survey/${questionNumberInt + 1}`}>Suivant</StyledLink>
+      <StyledLink to={`survey/${questionNumberInt + 1}`} >Suivant</StyledLink>
     ) : (
       <Link to="/results">Résultats</Link>
     )
-  const buttonDisplay = !isDataLoading && nextButton
+  const buttonDisplay = questions !== {} && nextButton
   const displayLoaderOrQuestion = isDataLoading ? (
     <Loader />
   ) : (
-    <QuestionContent>QuestionContent</QuestionContent>
+    <QuestionContent>{questions[questionNumberInt]}</QuestionContent>
   )
 
   return (

@@ -31,11 +31,11 @@ border-radius:50%;
 `
 
 const Card = (props) => {
-   const {name,picture,jobTitle} = props.profile
+   const {name,picture,job} = props
   return (
     <CardWrapper>
           <div style={{ display: 'flex', flexDirection: 'column', padding: 15 }}>
-            <CardLabel>{jobTitle}</CardLabel>
+            <CardLabel>{job}</CardLabel>
             <CardImage src={picture} alt="freelance" />
             <span>{name}</span>
         </div>
@@ -43,17 +43,14 @@ const Card = (props) => {
   )
 }
 
-Card.propTypes = {
-    name : PropTypes.string.isRequired,
-    jobTitle : PropTypes.string.isRequired,
-    picture : PropTypes.string.isRequired
+Card.propType = {
+  name : PropTypes.string.isRequired,
+  job: PropTypes.string.isRequired,
+  picture: PropTypes.string
 }
 
-Card.defaultProps = {
-    jobTitle: '',
-    name : '',
-    picture: DefaultPicture
-
+Card.defaultProps= {
+picture: DefaultPicture
 }
 
 export default Card
