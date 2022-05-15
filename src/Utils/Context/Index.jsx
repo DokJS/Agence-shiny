@@ -26,7 +26,7 @@ export const SurveyProvider = ({children}) => {
 
     const [answers, setAnswers] = useState({})
 
-    const addAnswer = currentAnswer => setAnswers({...answers,...currentAnswer})
+    const addAnswer = (currentAnswer) => setAnswers({...answers,...currentAnswer})
 
     return (
         <SurveyContext.Provider value={{answers,addAnswer}}>

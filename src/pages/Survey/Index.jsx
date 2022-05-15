@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Link, useParams} from 'react-router-dom'
+import { Link, useParams, useRouteMatch} from 'react-router-dom'
 import { Loader } from '../../Utils/Style/Atom'
 import { StyledLink } from '../../Utils/Style/Atom'
 import styled from 'styled-components'
@@ -95,12 +95,12 @@ const Survey = () => {
 
 
   const prevButton = questionNumberInt > 1 && (
-    <StyledLink to={`survey/${questionNumberInt - 1}`}>Précedent</StyledLink>
+    <StyledLink to={`/survey/${questionNumberInt - 1}`}>Précedent</StyledLink>
   )
 
   const nextButton =
     questionNumberInt < 10 ? (
-      <StyledLink to={`survey/${questionNumberInt + 1}`} >Suivant</StyledLink>
+      <StyledLink to={`/survey/${questionNumberInt + 1}`} >Suivant</StyledLink>
     ) : (
       <Link to="/results">Résultats</Link>
     )
