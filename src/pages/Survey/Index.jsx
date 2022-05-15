@@ -14,6 +14,10 @@ const SurveyContainer = styled.div`
   align-items: center;
 `
 
+const StyledSpanError = styled.div`
+ text-align: center
+`
+
 const QuestionTitle = styled.h2`
   text-decoration-color: ${colors.primary};
 `
@@ -70,7 +74,7 @@ const Survey = () => {
 
 
 
-  const {data,isLoading} = useFetch('http://www.localhost:8000/survey');
+  const {data,isLoading,error} = useFetch('http://www.localhost:8000/survey');
   const {surveyData} = data
 
 
@@ -93,7 +97,7 @@ const Survey = () => {
     <QuestionContent>{ surveyData && surveyData[questionNumberInt]}</QuestionContent>
   )
 
-  return (
+  return !error ? (
     <SurveyContainer>
       <QuestionTitle>Question : {questionNumberInt}</QuestionTitle>
       {displayLoaderOrQuestion}
@@ -112,7 +116,7 @@ const Survey = () => {
         {buttonDisplay}
       </LinkWrapper>
     </SurveyContainer>
-  )
+  ): (<StyledSpanError>Il y'a un problème</StyledSpanError>)
 }
 
 export default Survey;

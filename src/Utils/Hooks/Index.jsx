@@ -1,9 +1,10 @@
-import {useEffect,useState} from 'react'
+import {useEffect,useState,useContext} from 'react'
 
 export const useFetch = url => {
 
     const [data, setData] = useState({})
     const [isDataLoading, setIsDataLoading] = useState(true)
+    const [error, setError] = useState(false)
 
     useEffect(()=>{
 
@@ -13,15 +14,32 @@ export const useFetch = url => {
 
         async function fetchData (){
             
-            const response = await fetch(url)
-            const data = await response.json()
+            try {
+                const response = await fetch(url)
+                const data = await response.json()
+                setData(data)
 
-            setData(data)
-            setIsDataLoading(false)
+            }catch(error){
+                setError(true)
+
+            }finally{
+                setIsDataLoading(false)
+
+            }
+          
         }
 
         fetchData()
     },[url])
 
-    return {data,isDataLoading}
+    return {data,isDataLoading,error}
+}
+
+
+export const useTheme = themeContext => {
+
+const {theme} = useContext(themeContext)
+
+return theme 
+
 }
