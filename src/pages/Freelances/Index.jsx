@@ -4,6 +4,7 @@ import DefaultPicture from '../../assets/profile.png';
 import styled from 'styled-components';
 import colors from '../../Utils/Style/colors';
 import {Loader} from '../../Utils/Style/Atom'
+import { useFetch } from '../../Utils/Hooks/Index';
 
 const PageTitle = styled.h1`
 font-size: 30px;
@@ -31,35 +32,17 @@ justify-items: center;
 `
 
 const Freelances = () => {
-    const [freelanceProfiles, setFreelanceProfiles] = useState([]);
-    const [isLoadingData, setIsLoadingData] = useState(true);
-    const [error, setError] = useState(null);
+  
+   const {data,isLoading} = useFetch('http://www.localhost:8000/freelances')
+   const {freelancersList: freelanceProfiles} = data
 
-    useEffect(()=>{
-      fetch('http://www.localhost:8000/freelances')
-      .then( response => {
-        response.json()
-        .then( data => {
-          setFreelanceProfiles(data.freelancersList);
-        })
-      })
-      .catch( error => {
-        setError(error);
-      })
-      
-    },[]);
+ 
 
-    useEffect(()=> {
-      if(freelanceProfiles !== [] && error === null){
-        setIsLoadingData(false);
-      }
-    },[error,freelanceProfiles]);
-
-    const freelancersList = freelanceProfiles.map( ({id,job,name,picture}) => {
+     const freelancersList = freelanceProfiles && freelanceProfiles.map( ({id,job,name,picture}) => {
       return <Card key={id} name={name} job={job} picture={picture}/>
     });
 
-    const displayLoaderOrProfile = isLoadingData === true ? (<Loader/>)
+    const displayLoaderOrProfile = isLoading? (<Loader/>)
     : (
       <CardContainer>
       {freelancersList}

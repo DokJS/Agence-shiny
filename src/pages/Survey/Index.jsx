@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Link, useParams, useRouteMatch} from 'react-router-dom'
+import { Link, useParams} from 'react-router-dom'
 import { Loader } from '../../Utils/Style/Atom'
 import { StyledLink } from '../../Utils/Style/Atom'
 import styled from 'styled-components'
 import colors from '../../Utils/Style/colors';
 import { SurveyContext } from '../../Utils/Context/Index'
+import { useFetch } from '../../Utils/Hooks/Index'
 
 
 const SurveyContainer = styled.div`
@@ -66,31 +67,12 @@ const Survey = () => {
     addAnswer({[questionNumberInt]:response})
   }
 
-  // Used to contain question retrieved from the API
-  const [questions,setQuestions] = useState({})
-  // Used to detect data's disponibility
-  const [isDataLoading, setIsDataLoading] = useState(true)
-  // used for store error
-  const [error, setError] = useState(null)
 
-  useEffect(() => {
-    fetch('http://www.localhost:8000/survey')
-      .then((backResponse) => {
-        return backResponse.json()
-        .then((jsonResponse) => {
-          setQuestions(jsonResponse.surveyData)
-        })
-      })
-      .catch((error) => {
-        setError(error)
-      })
-  }, [])
 
-  useEffect(()=> {
-    if(questions !== {} && error === null){
-      setIsDataLoading(false);
-    }
-  },[questions,error])
+
+  const {data,isLoading} = useFetch('http://www.localhost:8000/survey');
+  const {surveyData} = data
+
 
 
 
@@ -104,11 +86,11 @@ const Survey = () => {
     ) : (
       <Link to="/results">Résultats</Link>
     )
-  const buttonDisplay = questions !== {} && nextButton
-  const displayLoaderOrQuestion = isDataLoading ? (
+  const buttonDisplay = surveyData !== {} && nextButton
+  const displayLoaderOrQuestion = isLoading ? (
     <Loader />
   ) : (
-    <QuestionContent>{questions[questionNumberInt]}</QuestionContent>
+    <QuestionContent>{ surveyData && surveyData[questionNumberInt]}</QuestionContent>
   )
 
   return (
