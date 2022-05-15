@@ -7,28 +7,33 @@ import Header from './components/Header/Index';
 import Error from './components/Error/Index';
 import Results from './pages/Results/Index';
 import Freelances from './pages/Freelances/Index';
-import { createGlobalStyle } from 'styled-components';
+import Footer from './components/Footer/Index';
+import {ThemeProvider} from './Utils/Context/Index';
+import { SurveyProvider } from './Utils/Context/Index';
+import GlobalStyle from './Utils/Style/GlobalStyle';
 
-const GlobalStyle = createGlobalStyle`
-div {
-  font-family: 'Poppins', sans-serif;
-}
-`
+
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
-      <GlobalStyle/>
+     <ThemeProvider>
+     <GlobalStyle/>
       <Header/>
-    <Routes>
-      <Route exact path='/' element={<Home/>}/>
+      <SurveyProvider>
+      <Routes>
+    <Route exact path='/' element={<Home/>}/>
       <Route path='/survey/:questionNumber' element={<Survey/>}/>
       <Route path='/*' element={<Error/>}/>
       <Route path='/results' element={<Results/>}/>
       <Route path='/freelances' element={<Freelances/>}/>
     </Routes>
+      </SurveyProvider>
+    <Footer/>
+     </ThemeProvider>
     </Router>
   </React.StrictMode>
 );

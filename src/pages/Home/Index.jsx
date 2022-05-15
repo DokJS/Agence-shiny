@@ -51,10 +51,6 @@ border:none;
 
 const Home = () => {
 
-  useLayoutEffect(()=> {
-    document.title= 'Agence Shiny'
-  })
-
   return (
     <StyledMain>
       <StyledLeft>
