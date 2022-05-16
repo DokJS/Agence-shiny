@@ -49,10 +49,18 @@ margin-top: 120px;
 border:none;
 `
 
+/**
+ * Used for compute the sum of two numbers provided
+ * @returns the sum of supplied number
+ */
+
+export const sum = (numberA,numberB)=> numberA + numberB
+
 const Home = () => {
 
   return (
     <StyledMain>
+      {sum(10,10)}
       <StyledLeft>
       <StyledTitle>Repérez vos besoins, on s'occupe du reste, avec les meilleurs talents</StyledTitle>
       <StyledButton>Faire le test</StyledButton>

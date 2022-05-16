@@ -67,8 +67,9 @@ const LoaderWrapper = styled.div`
  * @returns user's response in string format separed by '&'
  */
 
-const formatUserAnswer = (answers) => {
-  const responseNumber = Object.keys(answers)
+export const formatUserAnswer = (answers) => {
+  if(answers !=={}){
+    const responseNumber = Object.keys(answers)
   const responseArr = []
 
   responseNumber.forEach((current) => {
@@ -82,6 +83,15 @@ const formatUserAnswer = (answers) => {
   })
 
   return responseArr.join('&')
+  }
+  return ''
+}
+
+export const formatJobList = (title,listLength,index)=>{
+  if(index === listLength -1){
+    return title
+  }
+  return `${title},`
 }
 
 const Results = () => {
@@ -116,7 +126,7 @@ const Results = () => {
       return (
         <JobTitle key={index} theme={theme}>
           {title}
-          {index === resultsData.length - 1 ? '' : ', '}
+          {formatJobList(title,resultsData.length,index)}
         </JobTitle>
       )
     })
