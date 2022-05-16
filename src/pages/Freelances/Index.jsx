@@ -1,6 +1,5 @@
-import React,{useState,useEffect} from 'react';
+import React from 'react';
 import Card from '../../components/Card/Index';
-import DefaultPicture from '../../assets/profile.png';
 import styled from 'styled-components';
 import colors from '../../Utils/Style/colors';
 import {Loader} from '../../Utils/Style/Atom'
@@ -24,11 +23,13 @@ padding-bottom: 30px;
 
 const CardContainer = styled.div`
 display: grid;
-gap: 24px;
-grid-template-rows: repeat(2,350px);
+gap: 20px;
+grid-template-rows: auto auto;
 grid-template-columns: repeat(2,1fr);
-align-items: center;
+align-items: start;
 justify-items: center;
+max-width: 835px;
+margin: 0 auto;
 `
 
 const Freelances = () => {
