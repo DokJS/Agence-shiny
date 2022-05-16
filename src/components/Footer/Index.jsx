@@ -29,7 +29,7 @@ const Footer = () => {
 
   return (
     <FooterContainer>
-        <NightModeButton onClick={()=>toggleTheme()} >Passez en mode {symbolDisplay} </NightModeButton>
+        <NightModeButton onClick={()=>toggleTheme()} >Passez en mode {symbolDisplay}</NightModeButton>
     </FooterContainer>
   )
 }

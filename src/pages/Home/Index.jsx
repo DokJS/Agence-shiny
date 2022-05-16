@@ -1,4 +1,4 @@
-import React,{useLayoutEffect} from 'react';
+import React from 'react';
 import Logo from '../../assets/grosLogo.svg';
 import styled from 'styled-components';
 import colors from '../../Utils/Style/colors';
@@ -60,7 +60,6 @@ const Home = () => {
 
   return (
     <StyledMain>
-      {sum(10,10)}
       <StyledLeft>
       <StyledTitle>Repérez vos besoins, on s'occupe du reste, avec les meilleurs talents</StyledTitle>
       <StyledButton>Faire le test</StyledButton>
