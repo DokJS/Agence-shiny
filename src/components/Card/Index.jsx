@@ -7,6 +7,7 @@ import colors from '../../Utils/Style/colors';
 const CardWrapper = styled.div`
 display: flex;
 flex-direction: column;
+align-items: center;
 padding:15px;
 background-color: ${colors.backgroundLight};
 border-radius: 30px;
@@ -36,14 +37,18 @@ const Card = (props) => {
 
   
 
-   const favoriteSymbol = favorite ? ('⭐️') : '';
+   const favoriteDisplay = !favorite ?
+    (<React.Fragment>
+     <span id='title'>{name}</span>
+   </React.Fragment>)
+   :(<React.Fragment>
+     <span id='title'>⭐️{name}⭐️</span>
+   </React.Fragment>);
   return (
     <CardWrapper onClick={()=>setFavorite(true)}>
-          <div style={{ display: 'flex', flexDirection: 'column', padding: 15 }}>
             <CardLabel>{job}</CardLabel>
             <CardImage src={picture} alt="freelance" />
-            <span>{favoriteSymbol}{name}{favoriteSymbol}</span>
-        </div>
+            {favoriteDisplay}
     </CardWrapper>
   )
 }
