@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import DefaultPicture from '../../assets/profile.png';
 import styled from 'styled-components';
@@ -32,12 +32,17 @@ border-radius:50%;
 
 const Card = (props) => {
    const {name,picture,job} = props
+   const [favorite, setFavorite] = useState(false)
+
+  
+
+   const favoriteSymbol = favorite ? ('⭐️') : '';
   return (
-    <CardWrapper>
+    <CardWrapper onClick={()=>setFavorite(true)}>
           <div style={{ display: 'flex', flexDirection: 'column', padding: 15 }}>
             <CardLabel>{job}</CardLabel>
             <CardImage src={picture} alt="freelance" />
-            <span>{name}</span>
+            <span>{favoriteSymbol}{name}{favoriteSymbol}</span>
         </div>
     </CardWrapper>
   )
