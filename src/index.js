@@ -11,6 +11,7 @@ import Footer from './components/Footer/Index';
 import {ThemeProvider} from './Utils/Context/Index';
 import { SurveyProvider } from './Utils/Context/Index';
 import GlobalStyle from './Utils/Style/GlobalStyle';
+import Profile from './pages/Profile/Index'
 
 
 
@@ -28,6 +29,7 @@ root.render(
     <Route exact path='/' element={<Home/>}/>
       <Route path='/survey/:questionNumber' element={<Survey/>}/>
       <Route path='/*' element={<Error/>}/>
+      <Route path='/profile/:id' element={<Profile/>}/>
       <Route path='/results' element={<Results/>}/>
       <Route path='/freelances' element={<Freelances/>}/>
     </Routes>

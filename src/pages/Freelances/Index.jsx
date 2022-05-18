@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import colors from '../../Utils/Style/colors';
 import {Loader} from '../../Utils/Style/Atom'
 import { useFetch } from '../../Utils/Hooks/Index';
+import { Link } from 'react-router-dom';
 
 const PageTitle = styled.h1`
 font-size: 30px;
@@ -40,7 +41,11 @@ const Freelances = () => {
  
 
      const freelancersList = freelanceProfiles && freelanceProfiles.map( ({id,job,name,picture},index) => {
-      return <Card key={index} name={name} job={job} picture={picture}/>
+      return (
+        <Link key={`freelance-${id}`} to={`/profile/${id}`}>
+        <Card  name={name} job={job} picture={picture}/>
+        </Link>
+      )
     });
 
     const displayLoaderOrProfile = isDataLoading ? (<Loader data-testid="loader"/>)

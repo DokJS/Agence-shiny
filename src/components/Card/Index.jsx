@@ -37,28 +37,20 @@ class Card extends Component{
     super(props)
   
     this.state = {
-       isFavourite:false
     }
 
-    this.setFavorite = this.setFavorite.bind(this)
+ 
   }
 
-    setFavorite(param){
-      
-      this.setState({
-        isFavourite:param
-      })
-    }
-
+ 
     
   render(){
     const {picture,job} = this.props
     return (
-      <CardWrapper onClick={()=>this.setFavorite(true)}>
+      <CardWrapper>
               <CardLabel>{job}</CardLabel>
               <CardImage src={picture} alt="freelance" />
-              {!this.state.isFavourite ? (<span id='title'>{this.props.name}</span>)
-              : (<span id='title'>⭐️{this.props.name}⭐️</span>)}
+              (<span id='title'>{this.props.name}</span>
       </CardWrapper>
     )
   }
