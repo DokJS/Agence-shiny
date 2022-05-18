@@ -63,8 +63,8 @@ const LoaderWrapper = styled.div`
 `
 
 /**
- * Used for modify the user's responses format for be able to include them in a request
- * @param userResponse, represents the object which contains responses
+ * Used to format user's response before the call
+ * @param userResponse, represents object which contains responses
  * @returns user's response in string format separed by '&'
  */
 
@@ -103,15 +103,14 @@ const Results = () => {
   const theme = useTheme(ThemeContext)
   console.log(theme)
 
-  const { data, error, isLoading } = useFetch(
-      `http://www.localhost:8000/results?${queryParams.toString()}`
+  const { data, error, isLoading } = useFetch(`http://www.localhost:8000/results?${queryParams.toString()}`
   )
   const { resultsData } = data
 
- // Used for display the result of API Call 
-  const displayResults =
+ // Used for display datas retrieved during call
+  const resultGroup =
     resultsData &&
-    resultsData.map(({ title, description }, index) => {
+    (resultsData.map(({ title, description }, index) => {
       return (
         <div key={index}>
           <DescriptionWrapper>
@@ -120,12 +119,12 @@ const Results = () => {
           </DescriptionWrapper>
         </div>
       )
-    })
+    }))
 
-    // Used for display title of each result item under the main title
-  const resultsTitle =
+    // Used for display result's title
+  const titleGroup =
     resultsData &&
-    resultsData.map(({ title, ...rest }, index) => {
+    resultsData.map(({title}, index) => {
       return (
         <JobTitle key={index} theme={theme}>
           {formatJobList(title,resultsData.length,index)}
@@ -134,18 +133,19 @@ const Results = () => {
     })
 
 
-  return queryParams.length === 0 ? <EmptyList/>
+  return queryParams.length === 0 || queryParams === '' ? 
+  <EmptyList/>
   :( !error ? (
     <ResultsContainer>
       <ResultsTitle theme={theme}>
-      <StyledTitleContainer> Les compétences dont vous avez besoin :{resultsTitle}</StyledTitleContainer>
+      <StyledTitleContainer> Les compétences dont vous avez besoin :{titleGroup}</StyledTitleContainer>
       </ResultsTitle>
       {isLoading ? (
         <LoaderWrapper>
           <Loader />
         </LoaderWrapper>
       ) : (
-        displayResults
+        resultGroup
       )}
     </ResultsContainer>
   ) : (

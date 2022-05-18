@@ -90,17 +90,19 @@ const Survey = () => {
     ) : (
       <Link to="/results">Résultats</Link>
     )
-  const buttonDisplay = surveyData !== {} && nextButton
-  const displayLoaderOrQuestion = isLoading ? (
+
+  const buttonDisplay = surveyData  && nextButton
+
+  const maincontent = isLoading ? (
     <Loader />
   ) : (
-    <QuestionContent>{ surveyData && surveyData[questionNumberInt]}</QuestionContent>
+    <QuestionContent>{ surveyData && (surveyData[questionNumberInt])}</QuestionContent>
   )
 
   return !error ? (
     <SurveyContainer>
       <QuestionTitle>Question : {questionNumberInt}</QuestionTitle>
-      {displayLoaderOrQuestion}
+      {maincontent}
       <ReplyWrapper>
         <ReplyBox isSelected={answers[questionNumber] === true ? true : false}  
         onClick={()=>saveResponse(true)}>

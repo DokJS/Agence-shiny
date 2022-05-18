@@ -1,12 +1,11 @@
-import React , {useState,useContext} from 'react'
+import React , {useContext} from 'react'
 import { useParams } from 'react-router-dom'
 import { useFetch } from '../../Utils/Hooks/Index'
 import { Loader } from '../../Utils/Style/Atom'
-
 import styled from 'styled-components'
 import colors from '../../Utils/Style/colors'
 import { ThemeContext } from '../../Utils/Context/Index'
-import { ThemeProvider } from 'styled-components'
+
 
 const ProfileWrapper = styled.div`
   display: flex;
@@ -95,21 +94,21 @@ const Index = () => {
   const {id} = useParams()
   const {theme} = useContext(ThemeContext)
   
-  // Call API
   const {data,isDataLoading} = useFetch(`http://localhost:8000/freelance?id=${id}`);
   const {freelanceData:profileData} = data
-  
-  const skillsList = profileData && profileData.skills.map( (skill,index)=>{
+
+
+  const skillsList = profileData && (profileData.skills.map( (skill,index)=>{
       return(
           <Skill key={`${skill}-${id}`} theme={theme}>
               {skill}
           </Skill>
       )
   })
-  
+  )
   
   return isDataLoading ? 
-  <Loader/>
+  (<Loader/>)
     :(
        profileData && (
            <ProfileWrapper theme={theme}>
@@ -133,4 +132,4 @@ const Index = () => {
     )
 }
 
-export default Index
+export default Index;

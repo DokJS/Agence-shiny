@@ -36,22 +36,21 @@ margin: 0 auto;
 const Freelances = () => {
   
    const {data,isDataLoading} = useFetch('http://www.localhost:8000/freelances')
-   const {freelancersList: freelanceProfiles} = data
+   const {freelancersList: freelancers} = data
 
- 
-
-     const freelancersList = freelanceProfiles && freelanceProfiles.map( ({id,job,name,picture},index) => {
-      return (
+     const freelancersGroup = freelancers && (freelancers.map( ({id,job,name,picture},index) =>{
+       return(
         <Link key={`freelance-${id}`} to={`/profile/${id}`} style={{textDecoration:'none'}}>
         <Card  name={name} job={job} picture={picture}/>
         </Link>
-      )
-    });
+       )
+     }))
 
-    const displayLoaderOrProfile = isDataLoading ? (<Loader data-testid="loader"/>)
+
+    const mainContent = isDataLoading ? (<Loader data-testid="loader"/>)
     : (
       <CardContainer>
-      {freelancersList}
+      {freelancersGroup}
       </CardContainer>
     );
    
@@ -59,7 +58,7 @@ const Freelances = () => {
     <div>
         <PageTitle>Trouvez votre prestataire</PageTitle>
         <PageSubTitle>Chez shiny, nous réunissons les meilleures profils pour vous.</PageSubTitle>
-        {displayLoaderOrProfile}
+        {mainContent}
     </div>
   )
 }
