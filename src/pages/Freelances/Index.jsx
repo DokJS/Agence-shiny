@@ -34,16 +34,16 @@ margin: 0 auto;
 
 const Freelances = () => {
   
-   const {data,isLoading} = useFetch('http://www.localhost:8000/freelances')
+   const {data,isDataLoading} = useFetch('http://www.localhost:8000/freelances')
    const {freelancersList: freelanceProfiles} = data
 
  
 
-     const freelancersList = freelanceProfiles && freelanceProfiles.map( ({id,job,name,picture}) => {
-      return <Card key={id} name={name} job={job} picture={picture}/>
+     const freelancersList = freelanceProfiles && freelanceProfiles.map( ({id,job,name,picture},index) => {
+      return <Card key={index} name={name} job={job} picture={picture}/>
     });
 
-    const displayLoaderOrProfile = isLoading? (<Loader/>)
+    const displayLoaderOrProfile = isDataLoading ? (<Loader data-testid="loader"/>)
     : (
       <CardContainer>
       {freelancersList}

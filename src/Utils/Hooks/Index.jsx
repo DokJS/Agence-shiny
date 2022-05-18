@@ -15,6 +15,7 @@ export const useFetch = url => {
         async function fetchData (){
             
             try {
+                setIsDataLoading(true)
                 const response = await fetch(url)
                 const data = await response.json()
                 setData(data)
