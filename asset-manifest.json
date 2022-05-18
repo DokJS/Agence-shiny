@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/Agence-shiny/static/js/main.91fd5268.js",
+    "static/media/notFound.svg": "/Agence-shiny/static/media/notFound.75c9518ab2c7a688bb7305f0755a1726.svg",
+    "static/media/grosLogo.svg": "/Agence-shiny/static/media/grosLogo.4641bfe89ff61786d219b1616ed999e4.svg",
+    "index.html": "/Agence-shiny/index.html",
+    "main.91fd5268.js.map": "/Agence-shiny/static/js/main.91fd5268.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.91fd5268.js"
+  ]
+}
