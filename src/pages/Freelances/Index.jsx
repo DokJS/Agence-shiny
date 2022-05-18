@@ -42,7 +42,7 @@ const Freelances = () => {
 
      const freelancersList = freelanceProfiles && freelanceProfiles.map( ({id,job,name,picture},index) => {
       return (
-        <Link key={`freelance-${id}`} to={`/profile/${id}`}>
+        <Link key={`freelance-${id}`} to={`/profile/${id}`} style={{textDecoration:'none'}}>
         <Card  name={name} job={job} picture={picture}/>
         </Link>
       )

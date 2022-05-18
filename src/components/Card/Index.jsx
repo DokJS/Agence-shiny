@@ -32,16 +32,6 @@ border-radius:50%;
 `
 
 class Card extends Component{
-   
-  constructor(props) {
-    super(props)
-  
-    this.state = {
-    }
-
- 
-  }
-
  
     
   render(){
