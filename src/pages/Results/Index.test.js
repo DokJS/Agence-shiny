@@ -2,7 +2,7 @@ import { setupServer } from "msw/node"
 import { rest } from "msw"
 import { render } from "../../Utils/test/Index";
 import Results from './Index'
-import { waitFor, screen } from "@testing-library/react";
+import { waitFor, screen, fireEvent } from "@testing-library/react";
 
 
 

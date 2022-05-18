@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Link, useParams} from 'react-router-dom'
 import { Loader } from '../../Utils/Style/Atom'
 import { StyledLink } from '../../Utils/Style/Atom'

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import DefaultPicture from '../../assets/profile.png';
 import styled from 'styled-components';
@@ -31,26 +31,37 @@ width:80px;
 border-radius:50%;
 `
 
-const Card = (props) => {
-   const {name,picture,job} = props
-   const [favorite, setFavorite] = useState(false)
-
+class Card extends Component{
+   
+  constructor(props) {
+    super(props)
   
+    this.state = {
+       isFavourite:false
+    }
 
-   const favoriteDisplay = !favorite ?
-    (<React.Fragment>
-     <span id='title'>{name}</span>
-   </React.Fragment>)
-   :(<React.Fragment>
-     <span id='title'>⭐️{name}⭐️</span>
-   </React.Fragment>);
-  return (
-    <CardWrapper onClick={()=>setFavorite(true)}>
-            <CardLabel>{job}</CardLabel>
-            <CardImage src={picture} alt="freelance" />
-            {favoriteDisplay}
-    </CardWrapper>
-  )
+    this.setFavorite = this.setFavorite.bind(this)
+  }
+
+    setFavorite(param){
+      
+      this.setState({
+        isFavourite:param
+      })
+    }
+
+    
+  render(){
+    const {picture,job} = this.props
+    return (
+      <CardWrapper onClick={()=>this.setFavorite(true)}>
+              <CardLabel>{job}</CardLabel>
+              <CardImage src={picture} alt="freelance" />
+              {!this.state.isFavourite ? (<span id='title'>{this.props.name}</span>)
+              : (<span id='title'>⭐️{this.props.name}⭐️</span>)}
+      </CardWrapper>
+    )
+  }
 }
 
 Card.propType = {
