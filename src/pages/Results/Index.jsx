@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import colors from '../../Utils/Style/colors'
 import { useTheme } from '../../Utils/Hooks/Index'
 import { Loader } from '../../Utils/Style/Atom'
+import EmptyList from '../../components/EmptyList/Index'
 
 const ResultsContainer = styled.div`
   display: flex;
@@ -91,7 +92,7 @@ export const formatJobList = (title,listLength,index)=>{
   if(index === listLength -1){
     return title
   }
-  return `${title},`
+  return `${title}, `
 }
 
 const Results = () => {
@@ -107,6 +108,7 @@ const Results = () => {
   )
   const { resultsData } = data
 
+ // Used for display the result of API Call 
   const displayResults =
     resultsData &&
     resultsData.map(({ title, description }, index) => {
@@ -120,23 +122,24 @@ const Results = () => {
       )
     })
 
-  const displayResultsTitle =
+    // Used for display title of each result item under the main title
+  const resultsTitle =
     resultsData &&
     resultsData.map(({ title, ...rest }, index) => {
       return (
         <JobTitle key={index} theme={theme}>
-          {title}
           {formatJobList(title,resultsData.length,index)}
         </JobTitle>
       )
     })
 
-  return !error ? (
+
+  return queryParams.length === 0 ? <EmptyList/>
+  :( !error ? (
     <ResultsContainer>
       <ResultsTitle theme={theme}>
-        Les compétences dont vous avez besoin:{' '}
+      <StyledTitleContainer> Les compétences dont vous avez besoin :{resultsTitle}</StyledTitleContainer>
       </ResultsTitle>
-      <StyledTitleContainer>{displayResultsTitle}</StyledTitleContainer>
       {isLoading ? (
         <LoaderWrapper>
           <Loader />
@@ -147,7 +150,7 @@ const Results = () => {
     </ResultsContainer>
   ) : (
     <div>Il y'a un problème</div>
-  )
+  ))
 }
 
 export default Results
